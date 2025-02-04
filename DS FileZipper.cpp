@@ -55,7 +55,7 @@ class CharInfo
 		bool operator < (CharInfo &x) {return freq < x.freq;}
 		void operator ++ () {++freq;}
 		void operator = (CharInfo &x) {this->freq = x.freq; this->c = x.c; this->BinaryLength = x.BinaryLength; BinaryCode = x.BinaryCode;}
-		CharInfo operator + (CharInfo &x) {return CharInfo(this->freq + x.freq,'ง');}
+		CharInfo operator + (CharInfo &x) {return CharInfo(this->freq + x.freq,'ยง');}
 		bool operator == (char c) {return this->c == c;}
 		//Member Functions
 };
@@ -256,7 +256,7 @@ class HuffmanTree
 			if(!NOWRITE)
 			{
 				file2 << root->data.getFreq();
-				file2 << 'ง';
+				file2 << 'ยง';
 			}
 		}
 		void EncodeHuffmanCodes(Node<T> *r , unsigned short int &t , int index , fstream& File2 , LinkedList<T>& L, bool NOWRITE = 0)
@@ -278,10 +278,10 @@ class HuffmanTree
 				if(!NOWRITE)
 				{
 					File2 << index;
-					File2 << 'ง';
+					File2 << 'ยง';
 					File2 << r->data.getChar();
 					File2 << t;
-					File2 << 'ง';
+					File2 << 'ยง';
 				}
 				L.Insert(r->data);
 			}
@@ -337,7 +337,7 @@ class HuffmanTree
 		}
 		Node<T>* DecodeHuffmanCodes(fstream& file2, Node<T> *r, int size)
 		{
-			r = new Node<T>(CharInfo(0,'ง'));
+			r = new Node<T>(CharInfo(0,'ยง'));
 			for (int i = 0 ; i < size ; i++)
 			{
 				char c, EOC;
@@ -353,12 +353,12 @@ class HuffmanTree
 				{
 					if(((code & (1<<j))>>j))
 					{
-						if(!temp->right) temp->right = new Node<T>(CharInfo(0,'ง',code,length));
+						if(!temp->right) temp->right = new Node<T>(CharInfo(0,'ยง',code,length));
 						temp = temp->right;
 					}
 					else
 					{
-						if(!temp->left) temp->left = new Node<T>(CharInfo(0,'ง',code,length));
+						if(!temp->left) temp->left = new Node<T>(CharInfo(0,'ยง',code,length));
 						temp = temp->left;
 					}
 				}
@@ -435,7 +435,7 @@ void ZipFile()//Main Zip Function
 		//Putting all unique characters into Priority Queue
 		MinHeap<CharInfo> PriorityQueue(List.SizeofList());
 		PriorityQueue.InsertList(List);
-		WriteFile << PriorityQueue.Capacity() << "ง";
+		WriteFile << PriorityQueue.Capacity() << "ยง";
 	
 		//Creating Huffman Tree then Encoding and Compressing Data
 		HuffmanTree<CharInfo> Tree(PriorityQueue.CreateHuffmanTree());
@@ -487,7 +487,7 @@ void ZipFile()//Main Zip Function
 	
 		//Creating Huffman Tree then Encoding and Compressing Data
 		WriteFile.seekp(bheader.getImageOffset(), ios::beg);
-		WriteFile << PriorityQueue.Capacity() << "ง";
+		WriteFile << PriorityQueue.Capacity() << "ยง";
 		HuffmanTree<CharInfo> Tree(PriorityQueue.CreateHuffmanTree());
 		Tree.EncodeHuffmanCodes(WriteFile, List);
 		ReadFile.clear();
@@ -597,5 +597,5 @@ int main()
 		cin.get();
 		system("CLS");
 	}	
-	cout << "\nMade By Mohammad Yehya Hayati (K213309), Sufyan Abdul Rasheed (K213206)";
+	cout << "\nMade By Mohammad Yehya Hayati (K213309), Sufyan Abdul Rasheed (K213206), Syed Muhammad Taha Hassan (K214680)";
 }
